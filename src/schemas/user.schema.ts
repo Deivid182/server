@@ -16,6 +16,10 @@ export const registerSchema = object({
       minLength(1, 'Please enter your password.'),
       minLength(8, 'Your password must have 8 characters or more.'),
     ]),
+    confirmPassword: string("Password confirmation must be a string", [
+      minLength(1, 'Please enter your password.'),
+      minLength(8, 'Your password must have 8 characters or more.'),
+    ]),
   })
 })
 
