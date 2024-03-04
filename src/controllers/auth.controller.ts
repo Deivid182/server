@@ -63,3 +63,11 @@ export const login = async (req: Request<unknown, unknown, LoginSchemaType>, res
     return res.status(500).json({ message: "Internal server error" })
   }
 }
+
+export const getUserAuth = async (req: Request, res: Response) => {
+  try {
+    res.status(200).json({ userId: req.userId })
+  } catch (error) {
+    console.log("GET USER AUTH ERROR", error)
+  }
+}
