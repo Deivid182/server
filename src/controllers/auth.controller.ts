@@ -38,12 +38,12 @@ export const login = async (req: Request<unknown, unknown, LoginSchemaType>, res
     const user = await User.findOne({ email })
 
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" })
+      return res.status(400).send("Invalid credentials")
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
     if(!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" })
+      return res.status(400).send("Invalid credentials")
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET!, { expiresIn: "24h" })
@@ -70,4 +70,9 @@ export const getUserAuth = async (req: Request, res: Response) => {
   } catch (error) {
     console.log("GET USER AUTH ERROR", error)
   }
+}
+
+export const logOut = async (req: Request, res: Response) => {
+  res.clearCookie("token")
+  res.status(200).json({ message: "User logged out successfully" })
 }
