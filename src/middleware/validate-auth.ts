@@ -1,13 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { JwtPayload, verify } from "jsonwebtoken"
 
-declare global {
-  namespace Express {
-    interface Request {
-      userId?: string
-    }
-  }
-}
 export const validateAuth = (req: Request, res: Response, next: NextFunction) => {
   
   if (!req.cookies.token) {
