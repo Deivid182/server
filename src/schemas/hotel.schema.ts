@@ -1,4 +1,4 @@
-import { object, string, email, minLength, Input } from "valibot"
+import { object, string, email, minLength, Input, array } from "valibot"
 
 export const newHotelSchema = object({
   body: object({
@@ -23,11 +23,8 @@ export const newHotelSchema = object({
     childrenCount: string("Children count must be a number", [
       minLength(1, "Children count must be at least 1"),
     ]),
-    facilities: string("Facilities must be a string", [
-      minLength(3, "Facilities must be at least 3 characters"),
-    ]),
-    imageUrls: string("Image URLs must be a string", [
-      minLength(3, "Image URLs must be at least 3 characters"),
+    facilities: array(string("Facilities must be a string"), [
+      minLength(1, "Facilities must be at least 1"),
     ]),
     pricePerNight: string("Price per night must be a number", [
       minLength(1, "Price per night must be at least 1"),

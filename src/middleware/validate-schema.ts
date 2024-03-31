@@ -6,6 +6,7 @@ export const validateSchema =
     (req: Request, res: Response, next: NextFunction) => {
 
       try {
+        console.log(req.body, "middleware schema")
         const result = parse(schema, {
           body: req.body,
           query: req.query,

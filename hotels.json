@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Grand Hotel",
+    "city": "New York",
+    "country": "USA",
+    "description": "Luxurious hotel in the heart of New York City.",
+    "type": "Luxury",
+    "pricePerNight": 350,
+    "starRating": 5,
+    "adultCount": 2,
+    "childrenCount": 1,
+    "facilities": ["Swimming Pool", "Spa", "Restaurant", "Gym"]
+  },
+  {
+    "name": "Seaside Resort",
+    "city": "Miami",
+    "country": "USA",
+    "description": "Relaxing resort by the beach in Miami.",
+    "type": "Resort",
+    "pricePerNight": 250,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["Beach Access", "Poolside Bar", "Fitness Center", "Water Sports"]
+  },
+  {
+    "name": "Mountain Lodge",
+    "city": "Aspen",
+    "country": "USA",
+    "description": "Cozy lodge nestled in the mountains of Aspen.",
+    "type": "Lodge",
+    "pricePerNight": 200,
+    "starRating": 3,
+    "adultCount": 2,
+    "childrenCount": 2,
+    "facilities": ["Skiing", "Hiking Trails", "Fireplace", "Restaurant"]
+  },
+  {
+    "name": "City View Hotel",
+    "city": "Paris",
+    "country": "France",
+    "description": "Charming hotel with stunning views of Paris.",
+    "type": "Boutique",
+    "pricePerNight": 300,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["City View Rooms", "Fine Dining Restaurant", "Bar", "Concierge"]
+  },
+  {
+    "name": "Beachfront Inn",
+    "city": "Cancun",
+    "country": "Mexico",
+    "description": "Sunny beachfront inn in Cancun.",
+    "type": "Inn",
+    "pricePerNight": 150,
+    "starRating": 3,
+    "adultCount": 2,
+    "childrenCount": 1,
+    "facilities": ["Private Beach", "Pool", "Barbecue Area", "Family Rooms"]
+  },
+  {
+    "name": "Historic Manor",
+    "city": "Edinburgh",
+    "country": "Scotland",
+    "description": "Elegant manor house with a rich history in Edinburgh.",
+    "type": "Historic",
+    "pricePerNight": 280,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["Gardens", "Afternoon Tea", "Library", "Event Spaces"]
+  },
+  {
+    "name": "Ski Chalet Retreat",
+    "city": "Verbier",
+    "country": "Switzerland",
+    "description": "Quaint chalet perfect for a ski retreat in Verbier.",
+    "type": "Chalet",
+    "pricePerNight": 400,
+    "starRating": 5,
+    "adultCount": 4,
+    "childrenCount": 2,
+    "facilities": ["Ski-in/Ski-out", "Hot Tub", "Sauna", "Fireplace"]
+  },
+  {
+    "name": "Tropical Oasis Resort",
+    "city": "Bali",
+    "country": "Indonesia",
+    "description": "Serene resort surrounded by lush tropical gardens in Bali.",
+    "type": "Resort",
+    "pricePerNight": 180,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["Swimming Pools", "Spa", "Yoga Pavilion", "Restaurant"]
+  },
+  {
+    "name": "Riverside Retreat",
+    "city": "Kyoto",
+    "country": "Japan",
+    "description": "Tranquil retreat along the banks of the Kamo River in Kyoto.",
+    "type": "Ryokan",
+    "pricePerNight": 250,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["Japanese Garden", "Tea Room", "Hot Springs", "Traditional Tatami Rooms"]
+  },
+  {
+    "name": "Urban Boutique Hotel",
+    "city": "Berlin",
+    "country": "Germany",
+    "description": "Stylish boutique hotel in the heart of Berlin's cultural district.",
+    "type": "Boutique",
+    "pricePerNight": 220,
+    "starRating": 4,
+    "adultCount": 2,
+    "childrenCount": 0,
+    "facilities": ["Art Gallery", "Rooftop Bar", "Fitness Center", "Concierge"]
+  }
+]

@@ -4,6 +4,7 @@ import { NewHotelSchemaType } from "../schemas/hotel.schema"
 import Hotel from "../models/hotel";
 
 export const createHotel = async (req: Request<unknown, unknown, NewHotelSchemaType>, res: Response) => {
+  // console.log(req.files, "req.files")
   try {
     const imageFiles = req.files as Express.Multer.File[]
     const uploadPromises = imageFiles.map(async (image) => {
@@ -33,7 +34,7 @@ export const createHotel = async (req: Request<unknown, unknown, NewHotelSchemaT
     await hotel.save()
     res.status(201).json({ message: "Hotel created successfully", hotel })
   } catch (error) {
-    console.log(error)
+    console.log(error, "ERROR CREATING HOTEL")
     res.status(500).json({ message: "Internal server error" })
   }
 }

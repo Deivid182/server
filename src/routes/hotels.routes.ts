@@ -16,6 +16,6 @@ const upload = multer({
   }
 })
 
-router.post("/", validateAuth, upload.array("images", 6), validateSchema(newHotelSchema), createHotel)
+router.post("/", validateAuth, upload.array("imageFiles", 6), validateSchema(newHotelSchema), createHotel)
 
 export { router as hotelRouter }
