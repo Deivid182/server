@@ -36,6 +36,19 @@ test("should allow the user to create a new hotel", async ({ page }) => {
     path.join(__dirname, "files", "02.jpg"),
   ]);
 
-  await page.getByRole("button", { name: "Submit" }).click(); 
+  await page.getByRole("button", { name: "Submit" }).click();
   await expect(page.getByText("Hotel created successfully")).toBeVisible()
+})
+
+test("should allow the use to get all the hotels", async ({ page }) => {
+  await page.goto(`${CLIENT_URL}/home/`);
+  await expect(page.getByText("Grand Hotel")).toBeVisible();
+  await expect(page.getByText("Luxurious hotel")).toBeVisible();
+  await expect(page.getByText("New York, USA")).toBeVisible();
+  await expect(page.getByText("$350 per night")).toBeVisible();
+  await expect(page.getByText(/2 adults, 1 children/).first()).toBeVisible();
+  await expect(page.getByText("5 Star Rating").first()).toBeVisible();
+
+  await expect(page.getByRole("link", { name: "View Details" }).first()).toBeVisible();
+  await expect(page.getByRole("link", { name: "Add Hotel" })).toBeVisible();
 })

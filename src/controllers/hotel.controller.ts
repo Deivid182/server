@@ -38,3 +38,14 @@ export const createHotel = async (req: Request<unknown, unknown, NewHotelSchemaT
     res.status(500).json({ message: "Internal server error" })
   }
 }
+
+export const getHotels = async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find({ userId: req.userId })
+
+    res.status(200).json(hotels)
+  } catch (error) {
+    console.log(error, "ERROR GETTING HOTELS")
+    res.status(500).json({ message: "Internal server error" })
+  }
+}

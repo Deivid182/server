@@ -2,7 +2,7 @@ import { Router } from "express"
 import { validateSchema } from "../middleware/validate-schema"
 import { newHotelSchema } from "../schemas/hotel.schema"
 import { validateAuth } from "../middleware/validate-auth"
-import { createHotel } from "../controllers/hotel.controller"
+import { createHotel, getHotels } from "../controllers/hotel.controller"
 import multer from "multer"
 
 const router = Router()
@@ -17,5 +17,6 @@ const upload = multer({
 })
 
 router.post("/", validateAuth, upload.array("imageFiles", 6), validateSchema(newHotelSchema), createHotel)
+router.get("/", validateAuth, getHotels)
 
 export { router as hotelRouter }
