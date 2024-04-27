@@ -1,6 +1,6 @@
-import { object, string, email, minLength, Input, array } from "valibot"
+import { object, string, minLength, Input, array } from "valibot"
 
-export const newHotelSchema = object({
+export const hotelSchema = object({
   body: object({
     name: string("Name must be a string", [
       minLength(3, "Name must be at least 3 characters"),
@@ -36,4 +36,4 @@ export const newHotelSchema = object({
 })
 
 
-export type NewHotelSchemaType = Input<typeof newHotelSchema>["body"]
+export type HotelSchemaType = Input<typeof hotelSchema>["body"]

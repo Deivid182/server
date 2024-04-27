@@ -19,11 +19,11 @@ test.beforeEach(async ({ page }) => {
 test("should allow the user to create a new hotel", async ({ page }) => {
   await page.goto(`${CLIENT_URL}/home/new-hotel`);
 
-  await page.locator("input[name='name']").fill("Test Hotel");
-  await page.locator("input[name='description']").fill("Test Description");
-  await page.locator("input[name='city']").fill("Test City");
-  await page.locator("input[name='country']").fill("Test Country");
-  await page.locator("input[name='pricePerNight']").fill("100");
+  await page.locator("input[name='name']").fill("Grand Hotel");
+  await page.locator("input[name='description']").fill("Luxurious hotel");
+  await page.locator("input[name='city']").fill("New York");
+  await page.locator("input[name='country']").fill("USA");
+  await page.locator("input[name='pricePerNight']").fill("350");
   await page.selectOption("select[name='starRating']", "5");
   await page.getByText("Budget").click();
   await page.getByLabel("Parking").check();
@@ -51,4 +51,17 @@ test("should allow the use to get all the hotels", async ({ page }) => {
 
   await expect(page.getByRole("link", { name: "View Details" }).first()).toBeVisible();
   await expect(page.getByRole("link", { name: "Add Hotel" })).toBeVisible();
+})
+
+test("should allow the user to edit a hotel", async ({ page }) => {
+  await page.goto(`${CLIENT_URL}/home/`);
+
+  await page.getByRole("link", { name: "View Details" }).first().click();
+  await expect(page.getByRole("heading", { name: "Edit hotel" })).toBeVisible();
+  await page.waitForSelector("input[name='name']", { state: "attached" });
+  await expect(page.locator("input[name='name']")).toHaveValue("Grand Hotel");
+  await page.locator("input[name='name']").fill("Grand Hotel updated");
+  await page.getByRole("button", { name: "Submit" }).click();
+
+  await expect(page.getByText("Hotel updated successfully")).toBeVisible()
 })

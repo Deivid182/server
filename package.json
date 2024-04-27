@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --respawn --files ./src/index.ts",
     "build": "pnpm install && pnpm exec tsc",
     "start": "node dist/src/index.js",
-    "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e ts-node-dev --respawn --files ./src/index.ts"
+    "e2e": "PORT=4000 cross-env DOTENV_CONFIG_PATH=.env.e2e ts-node-dev --respawn --files ./src/index.ts"
   },
   "keywords": [],
   "author": "",
