@@ -35,5 +35,11 @@ export const hotelSchema = object({
   })
 })
 
+export const searchHotelsSchema = object({
+  query: object({
+    page: string("Page must be a number")
+  })
+})
 
 export type HotelSchemaType = Input<typeof hotelSchema>["body"]
+export type SearchHotelsSchemaType = Input<typeof searchHotelsSchema>["query"]

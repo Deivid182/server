@@ -6,6 +6,7 @@ import { v2 as cloudinary } from "cloudinary"
 import { connectDB } from "./db";
 import { usersRouter } from "./routes/users.routes";
 import { authRouter } from "./routes/auth.routes";
+import { myHotelRouter } from "./routes/my-hotels.routes";
 import { hotelRouter } from "./routes/hotels.routes";
 connectDB();
 
@@ -28,6 +29,7 @@ app.use(cors({
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/my-hotels", myHotelRouter);
 app.use("/api/hotels", hotelRouter);
 
 const port = process.env.PORT || 3000;

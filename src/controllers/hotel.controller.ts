@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { v2 as cloudinary } from "cloudinary"
-import { HotelSchemaType } from "../schemas/hotel.schema"
+import { HotelSchemaType, SearchHotelsSchemaType } from "../schemas/hotel.schema"
 import Hotel from "../models/hotel";
 
 export const createHotel = async (req: Request<unknown, unknown, HotelSchemaType>, res: Response) => {
@@ -83,6 +83,27 @@ export const editHotel = async (req: Request<{ hotelId: string }, unknown, Hotel
     console.log(error, "ERROR EDITING HOTEL")
     res.status(500).json({ message: "Internal server error" })
   }
+}
+
+export const searchHotels = async (req: Request<unknown, unknown, unknown, SearchHotelsSchemaType>, res: Response) => {
+  const pageSize = 5;
+  const pageNumber = req.query.page ? parseInt(req.query.page) : 1;
+
+  const skip = (pageNumber - 1) * pageSize;
+
+  const hotels = await Hotel.find().skip(skip).limit(pageSize);
+  const total = await Hotel.countDocuments();
+
+  const response = {
+    data: hotels,
+    pagination: {
+      total,
+      page: pageNumber,
+      pages: Math.ceil(total / pageSize),
+    }
+  }
+
+  res.status(200).json(response);
 }
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
