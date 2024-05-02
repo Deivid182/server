@@ -68,7 +68,7 @@ export const editHotel = async (req: Request<{ hotelId: string }, unknown, Hotel
       _id: req.params.hotelId,
       userId: req.userId,
     }, hotelData, { new: true })
-    if(!updatedHotel) {
+    if (!updatedHotel) {
       return res.status(404).json({ message: "Hotel not found" })
     }
 
@@ -86,24 +86,44 @@ export const editHotel = async (req: Request<{ hotelId: string }, unknown, Hotel
 }
 
 export const searchHotels = async (req: Request<unknown, unknown, unknown, SearchHotelsSchemaType>, res: Response) => {
-  const pageSize = 5;
-  const pageNumber = req.query.page ? parseInt(req.query.page) : 1;
-
-  const skip = (pageNumber - 1) * pageSize;
-
-  const hotels = await Hotel.find().skip(skip).limit(pageSize);
-  const total = await Hotel.countDocuments();
-
-  const response = {
-    data: hotels,
-    pagination: {
-      total,
-      page: pageNumber,
-      pages: Math.ceil(total / pageSize),
+  try {
+    const query = constructSearchQuery(req.query)
+    let sortOptions = {};
+    switch (req.query.sortOption) {
+      case "starRating":
+        sortOptions = { starRating: -1 };
+        break;
+      case "pricePerNightAsc":
+        sortOptions = { pricePerNight: 1 };
+        break;
+      case "pricePerNightDesc":
+        sortOptions = { pricePerNight: -1 };
+        break;
     }
-  }
 
-  res.status(200).json(response);
+    const pageSize = 5;
+    const pageNumber = req.query.page ? parseInt(req.query.page) : 1;
+
+    const skip = (pageNumber - 1) * pageSize;
+
+    const hotels = await Hotel.find(query).sort(sortOptions).skip(skip).limit(pageSize);
+    const total = await Hotel.countDocuments(query);
+
+    const response = {
+      data: hotels,
+      pagination: {
+        total,
+        page: pageNumber,
+        pages: Math.ceil(total / pageSize),
+      }
+    }
+
+    res.status(200).json(response);
+
+  } catch (error) {
+    console.log(error, "ERROR SEARCHING HOTELS")
+    res.status(500).json({ message: "Internal server error" })
+  }
 }
 
 async function uploadImages(imageFiles: Express.Multer.File[]) {
@@ -117,4 +137,63 @@ async function uploadImages(imageFiles: Express.Multer.File[]) {
   });
   const imageUrls = await Promise.all(uploadPromises)
   return imageUrls
+}
+
+export interface SearchParams {
+  destination?: string;
+  adultCount?: string;
+  childrenCount?: string;
+  facilities?: string[] | string;
+  types?: string[] | string;
+  stars?: string[] | string;
+  maxPrice?: string;
+}
+const constructSearchQuery = (searchParams: SearchParams) => {
+  const query: any = {};
+
+  if (searchParams.destination) {
+    query.$or = [
+      { city: { $regex: searchParams.destination, $options: "i" } },
+      { country: { $regex: searchParams.destination, $options: "i" } },
+    ]
+  }
+
+  if (searchParams.adultCount) {
+    query.adultCount = {
+      $gte: searchParams.adultCount
+    }
+  }
+
+  if (searchParams.childrenCount) {
+    query.childrenCount = {
+      $gte: searchParams.childrenCount
+    }
+  }
+
+  if (searchParams.facilities) {
+    query.facilities = {
+      $all: Array.isArray(searchParams.facilities) ? searchParams.facilities : [searchParams.facilities]
+    }
+  }
+  if (searchParams.types) {
+    query.type = {
+      $in: Array.isArray(searchParams.types) ? searchParams.types : [searchParams.types]
+    }
+  }
+
+  if (searchParams.stars) {
+    const starRatings = Array.isArray(searchParams.stars) ?
+      searchParams.stars.map((star: string) => parseInt(star)) :
+      parseInt(searchParams.stars)
+    query.starRating = {
+      $in: starRatings
+    }
+  }
+
+  if (searchParams.maxPrice) {
+    query.pricePerNight = {
+      $lte: parseInt(searchParams.maxPrice)
+    }
+  }
+  return query;
 }

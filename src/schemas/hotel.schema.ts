@@ -37,7 +37,15 @@ export const hotelSchema = object({
 
 export const searchHotelsSchema = object({
   query: object({
-    page: string("Page must be a number")
+    page: string("Page must be a number"),
+    destination: string("Destination must be a string"),
+    adultCount: string("Adult count must be a number"),
+    childrenCount: string("Children count must be a number"),
+    facilities: array(string("Facilities must be a string")),
+    types: array(string("Types must be a string")),
+    stars: array(string("Stars must be a string")),
+    maxPrice: string("Max price must be a number"),
+    sortOption: string("Sort option must be a string"),
   })
 })
 
