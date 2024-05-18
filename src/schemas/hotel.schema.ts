@@ -1,4 +1,4 @@
-import { object, string, minLength, Input, array } from "valibot"
+import { object, string, minLength, Input, array, optional } from "valibot"
 
 export const hotelSchema = object({
   body: object({
@@ -37,15 +37,15 @@ export const hotelSchema = object({
 
 export const searchHotelsSchema = object({
   query: object({
-    page: string("Page must be a number"),
-    destination: string("Destination must be a string"),
-    adultCount: string("Adult count must be a number"),
-    childrenCount: string("Children count must be a number"),
-    facilities: array(string("Facilities must be a string")),
-    types: array(string("Types must be a string")),
-    stars: array(string("Stars must be a string")),
-    maxPrice: string("Max price must be a number"),
-    sortOption: string("Sort option must be a string"),
+    page: optional(string("Page must be a number")),
+    destination: optional(string("Destination must be a string")),
+    adultCount: optional(string("Adult count must be a number")),
+    childrenCount: optional(string("Children count must be a number")),
+    facilities: optional(array(string("Facilities must be a string"))),
+    types: optional(array(string("Types must be a string"))),
+    stars: optional(array(string("Stars must be a string"))),
+    maxPrice: optional(string("Max price must be a number")),
+    sortOption: optional(string("Sort option must be a string")),
   })
 })
 
