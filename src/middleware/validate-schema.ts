@@ -6,17 +6,16 @@ export const validateSchema =
     (req: Request, res: Response, next: NextFunction) => {
 
       try {
-        console.log(req.body, "middleware schema")
         const result = parse(schema, {
           body: req.body,
           query: req.query,
           params: req.params
         })
-
+        
         next()
       } catch (err) {
         const error = err as ValiError
-        console.log("from middleware")
+        console.log(error)
         // console.log(error.issues.map(issue => issue.path))
         return res.status(400).json(
           error.issues.map(issue => ({
