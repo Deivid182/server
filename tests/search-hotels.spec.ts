@@ -1,5 +1,4 @@
 import { test, expect } from '@playwright/test';
-import path from 'path';
 
 const CLIENT_URL = "http://localhost:5173";
 
@@ -20,8 +19,19 @@ test("should show search results", async ({ page }) => {
   await page.goto(CLIENT_URL)
 
   await page.getByPlaceholder('Search').fill('USA')
-  await page.getByRole('spinbutton').last().fill('1')
+  await page.getByRole('button', { name: 'Search' }).click()
+  
+  await expect(page.getByText('Hotels found in USA')).toBeVisible()
+})
+
+test("should show the hotel detail", async ({ page }) => {
+  await page.goto(CLIENT_URL)
+
+  await page.getByPlaceholder('Search').fill('USA')
   await page.getByRole('button', { name: 'Search' }).click()
 
-  await expect(page.getByText('Hotels found in USA')).toBeVisible()
+  await page.getByRole('link', { name: 'View more' }).first().click()
+  await expect(page).toHaveURL(/detail/)
+  await expect(page.getByRole('button', { name: 'Book Now' })).toBeVisible()
+
 })

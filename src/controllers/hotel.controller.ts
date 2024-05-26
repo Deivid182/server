@@ -47,7 +47,6 @@ export const getHotelById = async (req: Request<{ hotelId: string }, unknown, un
     const { hotelId } = req.params
     const hotelFound = await Hotel.findOne({
       _id: hotelId,
-      userId: req.userId
     })
     if (!hotelFound) {
       return res.status(404).json({ message: "Hotel not found" })

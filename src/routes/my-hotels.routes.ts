@@ -18,7 +18,7 @@ const upload = multer({
 
 router.post("/", validateAuth, upload.array("imageFiles", 6), validateSchema(hotelSchema), createHotel)
 router.get("/", validateAuth, getHotels)
-router.get("/:hotelId", validateAuth, getHotelById)
+router.get("/:hotelId", getHotelById)
 router.patch("/:hotelId", validateAuth, upload.array("imageFiles", 6), validateSchema(hotelSchema), editHotel)
 
 export { router as myHotelRouter }
